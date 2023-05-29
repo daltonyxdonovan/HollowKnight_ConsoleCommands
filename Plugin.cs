@@ -24,7 +24,7 @@ namespace ConsoleCommands
             if (canvas != null)
             {
                 popup_text.text = message;
-                popup_timer = 200;
+                popup_timer = 400;
             }
         }
 
@@ -43,7 +43,7 @@ namespace ConsoleCommands
                 popup_text.rectTransform.anchoredPosition = new Vector2(0, 0);
                 
                 popup_text.alignment = TextAlignmentOptions.Center;
-                popup_text.fontSize = 1;
+                popup_text.fontSize = .5f;
                 popup_text.color = Color.white;
                 popup_text.text = "";
 
@@ -67,6 +67,8 @@ namespace ConsoleCommands
 
             if (Input.GetKey(KeyCode.Space))
             {
+                PlayerData.instance.maxHealthBase = 10;
+                PlayerData.instance.maxHealth = 10;
                 PlayerData.instance.AddHealth(10);
                 PlayerData.instance.AddToMaxHealth(10);
                 Log("attempting to add health");
