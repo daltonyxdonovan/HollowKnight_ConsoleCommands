@@ -11,6 +11,7 @@ this will be on nexusmods soon with an easy installer for windows, but I will up
 To install this project, follow these steps:
 
 1. Download bepinex 6.0.0pre-1 (I use bepinex 6 from the github here: https://github.com/BepInEx/BepInEx/releases) DOES NOT WORK WITH BEPINEX 5.4
+	
 	1.a. Extract all files from the downloaded zip to your Hollow Knight installation. (Normally 'Program Files x86/steam/steamapps/common/Hollow Knight')
 
 2. Start the game at least once, to populate bepinex folders
