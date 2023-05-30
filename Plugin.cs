@@ -14,6 +14,7 @@ namespace ConsoleCommands
     {
         Canvas canvas;
         TextMeshProUGUI popup_text;
+        TextMeshProUGUI command_text;
         int popup_timer = 0;
         bool selected = false;
 
@@ -57,43 +58,28 @@ namespace ConsoleCommands
                 popup_text.color = Color.white;
                 popup_text.text = "";
 
+                //do the same for command_text, but it's position should be -13.1818 -8.1 0
+                command_text = new GameObject("Command Text", typeof(TextMeshProUGUI)).GetComponent<TextMeshProUGUI>();
+                command_text.transform.SetParent(canvas.transform);
+                command_text.rectTransform.anchorMin = new Vector2(0, 0);
+                command_text.rectTransform.anchorMax = new Vector2(0, 0);
+                command_text.rectTransform.anchoredPosition = new Vector2(-13,-8);
+                command_text.alignment = TextAlignmentOptions.Center;
+                command_text.fontSize = .5f;
+                command_text.color = Color.white;
+                command_text.text = "Press / for commands";
+
                 //bring it to the front of the 2d screen
                 canvas.planeDistance = 1;
                 //set it to the 'UI' layer
                 canvas.gameObject.layer = 5;
 
-                //create a unityEngine.UI input field
-                TMP_InputField inputField = new GameObject("Input Field", typeof(TMP_InputField)).GetComponent<TMP_InputField>();
-                //set it's parent to canvas
-                inputField.transform.SetParent(canvas.transform);
-                //set it's position to be in the center of the screen
-                inputField.transform.position = new Vector3(0, 0, 0);
-                //set it's scale to be 1,1,1
-                inputField.transform.localScale = new Vector3(1, 1, 1);
-                //set it's size to be 100, 50
-                inputField.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 50);
-                //set it's text component to be in the center of the screen
-                inputField.GetComponent<InputField>().textComponent.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-                inputField.GetComponent<InputField>().textComponent.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                inputField.GetComponent<InputField>().textComponent.rectTransform.anchoredPosition = new Vector2(0, 0);
                 
-                //set the color to white
-                inputField.GetComponent<InputField>().textComponent.color = Color.white;
-                //set the font size to .5
-                inputField.GetComponent<InputField>().textComponent.fontSize = 1;
-                //set the placeholder text to be "Enter Command"
-                inputField.GetComponent<InputField>().placeholder.GetComponent<TextMeshProUGUI>().text = "Press /";
-                //set the placeholder text to be in the center of the screen
-                inputField.GetComponent<InputField>().placeholder.GetComponent<TextMeshProUGUI>().rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
-                inputField.GetComponent<InputField>().placeholder.GetComponent<TextMeshProUGUI>().rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
-                inputField.GetComponent<InputField>().placeholder.GetComponent<TextMeshProUGUI>().rectTransform.anchoredPosition = new Vector2(0, 0);
 
-                //set the placeholder color to white
-                inputField.GetComponent<InputField>().placeholder.GetComponent<TextMeshProUGUI>().color = Color.white;
-                //set the placeholder font size to .5
-                inputField.GetComponent<InputField>().placeholder.GetComponent<TextMeshProUGUI>().fontSize = 1;
-                //set the placeholder to be in the center of the screen
-                inputField.GetComponent<InputField>().placeholder.GetComponent<TextMeshProUGUI>().alignment = TextAlignmentOptions.Center;
+
+                
+                
+
 
                 
 
