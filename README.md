@@ -1,4 +1,4 @@
-# HOLLOW KNIGHT CONSOLE COMMANDS BY DALTONYX <3
+# HOLLOW KNIGHT CONSOLE COMMANDS <3
 
 Adds several console commands to Hollow Knight. Why? Because we can, of course! Ever wanted to just play around in a really hard game?
 Infinite health! Infinite money! Godmode! Instakill! all ya could want, unless it isn't, in which case:
