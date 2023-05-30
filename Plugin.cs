@@ -12,7 +12,12 @@ namespace ConsoleCommands
         TextMeshProUGUI command_text;
         string command_string = "";
         int popup_timer = 0;
+        Vector2 player_pos;
+        Rigidbody2D rb;
         bool selected = false;
+        bool godmode = false;
+        bool xdamage = false;
+        bool flight = false;
 
         private void Awake()
         {
@@ -93,14 +98,14 @@ namespace ConsoleCommands
                 command_text.rectTransform.anchorMin = new Vector2(0, 0);
                 command_text.rectTransform.anchorMax = new Vector2(0, 0);
                 command_text.rectTransform.anchoredPosition = new Vector2(0,0);
-                command_text.alignment = TextAlignmentOptions.Center;
+                command_text.alignment = TextAlignmentOptions.Left;
                 command_text.fontSize = .5f;
                 command_text.color = Color.white;
                 command_text.text = "Press / for commands";
                 selected = false;
                 command_string = "";
                 //set position to (-12,8)
-                command_text.rectTransform.position = new Vector3(-12.5f, -8, 0);
+                command_text.rectTransform.position = new Vector3(35.5f, -8, 0);
 
                 //bring it to the front of the 2d screen
                 canvas.planeDistance = 1;
@@ -109,6 +114,27 @@ namespace ConsoleCommands
             }
             if (canvas != null)
             {
+                if (godmode)
+                {
+                    PlayerData.instance.health = 999;
+                    PlayerData.instance.maxHealth = 999;
+                }
+                if (xdamage)
+                {
+                    PlayerData.instance.nailDamage = 999;
+                    PlayerData.instance.beamDamage = 999;
+                }
+                if (flight)
+                {
+                    HeroController instance = HeroController.instance;
+                    if (instance != null)
+                    {
+                        //rb = instance.
+                    }
+                    //player_pos = HeroController.instance.
+                }
+
+
                 //if canvas isn't null, we can attempt to access values and stuff, but it's still unsafe in title
                 if (popup_timer > 0)
                 {
@@ -131,6 +157,7 @@ namespace ConsoleCommands
                     {
                         selected = true;
                         command_text.text = "/";
+                        command_string = "/";
                     }
                 }
 
@@ -141,7 +168,7 @@ namespace ConsoleCommands
                         if (command_string.Length > 0)
                         {
                             command_string = command_string.Substring(0, command_string.Length - 1);
-                            command_text.text = "/" + command_string;
+                            command_text.text = command_string;
                         }
                     }
                 }
@@ -156,10 +183,10 @@ namespace ConsoleCommands
                     }
                 }
 
-                if (Input.GetKey(KeyCode.Return))
+                if (Input.GetKeyDown(KeyCode.Return))
                 {
 
-                    if (command_string.StartsWith("/health"))
+                    if (command_string.StartsWith("/addhealth"))
                     {
                         string[] strings = command_text.text.Split();
                         int choice = int.Parse(strings[1]);
@@ -174,7 +201,7 @@ namespace ConsoleCommands
                         }
                     }
 
-                    else if (command_string.StartsWith("/mp"))
+                    else if (command_string.StartsWith("/addmp"))
                     {
                         string[] strings = command_text.text.Split();
                         int choice = int.Parse(strings[1]);
@@ -194,10 +221,46 @@ namespace ConsoleCommands
                         UnlockAllAchievements();
                     }
 
+                    else if (command_string.StartsWith("/godmode"))
+                    {
+                        godmode = true;
+                        Log("Godmode enabled!");
+                    }
 
-                    
+                    else if (command_string.StartsWith("/xdamage"))
+                    {
+                        xdamage = true;
+                        Log("Extra Damage (instakill) enabled!");
+                    }
+
+                    else if (command_string.StartsWith("/flight"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        bool choice = bool.Parse(strings[1]);
+                        flight = choice;
+                        Log($"Flight set to {choice}");
+                    }
+
+                    else if (command_string.StartsWith("/addmoney"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        if (choice < 0)
+                        {
+                            choice = 0;
+                            Log("You can't add a negative value!");
+                        }
+                        GameManager.instance.playerData.bankerBalance += choice;
+                        //PlayerData.instance.bankerBalance += choice;
+                        Log($"Added {choice} to Banker Balance\nBanker Balance: {GameManager.instance.playerData.bankerBalance}");
+                    }
 
 
+
+
+                    selected = false;
+                    command_text.text = "Press / for commands";
+                    command_string = "";
                 }
 
                 if (selected)
@@ -207,150 +270,187 @@ namespace ConsoleCommands
                     if (Input.GetKeyDown(KeyCode.A))
                     {
                         command_string += "a";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.B))
                     {
                         command_string += "b";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.C))
                     {
                         command_string += "c";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.D))
                     {
                         command_string += "d";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.E))
                     {
                         command_string += "e";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.F))
                     {
                         command_string += "f";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.G))
                     {
                         command_string += "g";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.H))
                     {
                         command_string += "h";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.I))
                     {
                         command_string += "i";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.J))
                     {
                         command_string += "j";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.K))
                     {
                         command_string += "k";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.L))
                     {
                         command_string += "l";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.M))
                     {
                         command_string += "m";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.N))
                     {
                         command_string += "n";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.O))
                     {
                         command_string += "o";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.P))
                     {
                         command_string += "p";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Q))
                     {
                         command_string += "q";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.R))
                     {
                         command_string += "r";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.S))
                     {
                         command_string += "s";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.T))
                     {
                         command_string += "t";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.U))
                     {
                         command_string += "u";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.V))
                     {
                         command_string += "v";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.W))
                     {
                         command_string += "w";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.X))
                     {
                         command_string += "x";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Y))
                     {
                         command_string += "y";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Z))
                     {
                         command_string += "z";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha0))
                     {
                         command_string += "0";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha1))
                     {
                         command_string += "1";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha2))
                     {
                         command_string += "2";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha3))
                     {
                         command_string += "3";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha4))
                     {
                         command_string += "4";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha5))
                     {
                         command_string += "5";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha6))
                     {
                         command_string += "6";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha7))
                     {
                         command_string += "7";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha8))
                     {
                         command_string += "8";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Alpha9))
                     {
                         command_string += "9";
+                        command_text.text = command_string;
                     }
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {
                         command_string += " ";
+                        command_text.text = command_string;
                     }
 
                 }
