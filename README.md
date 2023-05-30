@@ -38,8 +38,13 @@ To use this project, follow these steps:
 
 ## Current Commands
 /addhealth <int> - adds the amount entered to health and maxHealth both
+	
 /addmp <int> - adds the amount entered to MP and maxMP both
+	
 /addmoney <int> - adds the amount entered to the Banker
+	
 /achget - unlocks _ALL_ 63 achievements (requires the game on steam i think /shrug)
+	
 /godmode - enables godmode (as far as I can tell)
+	
 /xdamage - enables instakill (damage of nail and beam set to 999)
