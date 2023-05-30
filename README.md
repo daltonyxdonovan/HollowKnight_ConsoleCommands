@@ -37,11 +37,11 @@ To use this project, follow these steps:
 4. Press return (enter) to send the command.
 
 ## Current Commands
-/addhealth <int> - adds the amount entered to health and maxHealth both
+/addhealth (int) - adds the amount entered to health and maxHealth both
 	
-/addmp <int> - adds the amount entered to MP and maxMP both
+/addmp (int) - adds the amount entered to MP and maxMP both
 	
-/addmoney <int> - adds the amount entered to the Banker
+/addmoney (int) - adds the amount entered to the Banker
 	
 /achget - unlocks _ALL_ 63 achievements (requires the game on steam i think /shrug)
 	
