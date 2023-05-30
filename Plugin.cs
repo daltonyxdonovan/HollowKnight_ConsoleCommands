@@ -25,22 +25,63 @@ namespace ConsoleCommands
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} by Daltonyx is loaded!");
         }
 
+        public void AddGeo(int amount)
+        {
+            if (amount < 0)
+            {
+                Log("You can't choose a negative value!");
+                return;
+            }
+
+            GameManager.instance.playerData.geo += amount;
+            GeoCounter geoCounter = FindObjectOfType<GeoCounter>();
+            int counterCurrent;
+            counterCurrent = GameManager.instance.playerData.geo;
+            geoCounter.geoTextMesh.text = counterCurrent.ToString();
+            //i know it can be cleaned up but eh
+            //GameManager.instance.playerData.geo += amount;
+            Log($"Added {amount} Geo!\nGeo: {GameManager.instance.playerData.geo}");
+            
+            
+        }
+
+        public void AddCharm(int charmNum)
+        {
+            if (charmNum < 0 || charmNum > 44)
+            {
+                Log("That number doesn't exist.");
+                return;
+            }
+            
+            
+            GameManager.instance.playerData.equippedCharms.Add(charmNum);
+            
+            
+        }
+
         public void AddToMPReserve(int amount)
         {
-            PlayerData.instance.MPReserveMax += amount;
-            PlayerData.instance.MPReserveCap += amount;
-            PlayerData.instance.MPReserve += amount;
-            PlayerData.instance.AddToMaxMPReserve(amount);
-            Log($"Added {amount} to MP Reserve\nMP = {PlayerData.instance.MPReserve}\nMaxMPreserve = {PlayerData.instance.MPReserveMax}");
+            GameManager.instance.playerData.MPReserveMax += amount;
+            GameManager.instance.playerData.MPReserveCap += amount;
+            GameManager.instance.playerData.MPReserve += amount;
+            GameManager.instance.playerData.AddToMaxMPReserve(amount);
+            
+            Log($"Added {amount} to MP Reserve\nMP = {GameManager.instance.playerData.MPReserve}\nMaxMPreserve = {GameManager.instance.playerData.MPReserveMax}");
+        }
+
+        public void AddMP(int amount)
+        {
+            HeroController.instance.AddMPCharge(amount);
+            Log($"Added {amount} to MP!");
         }
 
         public void AddToHealthReserve(int amount)
         {
-            PlayerData.instance.maxHealthBase += amount;
-            PlayerData.instance.maxHealth += amount;
-            PlayerData.instance.AddHealth(amount);
-            PlayerData.instance.AddToMaxHealth(amount);
-            Log($"Added {amount} to Health Reserve\nHealth = {PlayerData.instance.health}\nMaxHealth = {PlayerData.instance.maxHealth}");
+            GameManager.instance.playerData.maxHealthBase += amount;
+            GameManager.instance.playerData.maxHealth += amount;
+            GameManager.instance.playerData.AddHealth(amount);
+            GameManager.instance.playerData.AddToMaxHealth(amount);
+            Log($"Added {amount} to Health Reserve\nHealth = {GameManager.instance.playerData.health}\nMaxHealth = {GameManager.instance.playerData.maxHealth}");
         }
 
         public void UnlockAllAchievements()
@@ -116,13 +157,14 @@ namespace ConsoleCommands
             {
                 if (godmode)
                 {
-                    PlayerData.instance.health = 999;
-                    PlayerData.instance.maxHealth = 999;
+                    GameManager.instance.playerData.health = 999;
+                    GameManager.instance.playerData.maxHealth = 999;
+                    GameManager.instance.playerData.MPCharge = 999;
                 }
                 if (xdamage)
                 {
-                    PlayerData.instance.nailDamage = 999;
-                    PlayerData.instance.beamDamage = 999;
+                    GameManager.instance.playerData.nailDamage = 999;
+                    GameManager.instance.playerData.beamDamage = 999;
                 }
                 if (flight)
                 {
@@ -190,7 +232,7 @@ namespace ConsoleCommands
                     {
                         string[] strings = command_text.text.Split();
                         int choice = int.Parse(strings[1]);
-                        
+
                         if (choice < 0)
                         {
                             Log("You can't add negative health! (;");
@@ -202,6 +244,21 @@ namespace ConsoleCommands
                     }
 
                     else if (command_string.StartsWith("/addmp"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+
+                        if (choice < 0)
+                        {
+                            Log("You can't add negative MP! (;");
+                        }
+                        else
+                        {
+                            AddMP(choice);
+                        }
+                    }
+
+                    else if (command_string.StartsWith("/addmpreserve"))
                     {
                         string[] strings = command_text.text.Split();
                         int choice = int.Parse(strings[1]);
@@ -238,7 +295,7 @@ namespace ConsoleCommands
                         string[] strings = command_text.text.Split();
                         bool choice = bool.Parse(strings[1]);
                         flight = choice;
-                        Log($"Flight set to {choice}");
+                        Log($"Flight set to {choice} NOTE: THIS COMMAND IS INACTIVE RN");
                     }
 
                     else if (command_string.StartsWith("/addmoney"))
@@ -251,8 +308,25 @@ namespace ConsoleCommands
                             Log("You can't add a negative value!");
                         }
                         GameManager.instance.playerData.bankerBalance += choice;
-                        //PlayerData.instance.bankerBalance += choice;
+                        //GameManager.instance.playerData.bankerBalance += choice;
                         Log($"Added {choice} to Banker Balance\nBanker Balance: {GameManager.instance.playerData.bankerBalance}");
+                    }
+
+                    else if (command_string.StartsWith("/addgeo"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        
+                        AddGeo(choice);
+                        
+
+                    }
+
+                    else if (command_string.StartsWith("/addcharm"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        AddCharm(choice);
                     }
 
 
