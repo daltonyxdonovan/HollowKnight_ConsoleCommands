@@ -1,11 +1,6 @@
 ﻿using BepInEx;
 using UnityEngine;
-using System.Collections;
-using UnityEngine.UI;
-//using unity's scene management
-using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.EventSystems;
 
 namespace ConsoleCommands
 {
@@ -16,14 +11,13 @@ namespace ConsoleCommands
         TextMeshProUGUI popup_text;
         TextMeshProUGUI command_text;
         string command_string = "";
-
         int popup_timer = 0;
         bool selected = false;
 
         private void Awake()
         {
             // Plugin startup logic
-            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} by Daltonyx is loaded!");
         }
 
         public void AddToMPReserve(int amount)
@@ -162,7 +156,6 @@ namespace ConsoleCommands
                     }
                 }
 
-
                 if (Input.GetKey(KeyCode.Return))
                 {
 
@@ -196,20 +189,171 @@ namespace ConsoleCommands
                         }
                     }
 
-                    else if (command_string.StartsWith("/ach_get"))
+                    else if (command_string.StartsWith("/achget"))
                     {
                         UnlockAllAchievements();
                     }
 
 
-
+                    
 
 
                 }
 
-                
+                if (selected)
+                {
+                    //I've tried like four different ways to do this without an if/else block for the _entire alphabet and all 10 numbers_, it's already taken too long so fine I guess here we go-
+                    
+                    if (Input.GetKeyDown(KeyCode.A))
+                    {
+                        command_string += "a";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.B))
+                    {
+                        command_string += "b";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.C))
+                    {
+                        command_string += "c";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.D))
+                    {
+                        command_string += "d";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        command_string += "e";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.F))
+                    {
+                        command_string += "f";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.G))
+                    {
+                        command_string += "g";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.H))
+                    {
+                        command_string += "h";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.I))
+                    {
+                        command_string += "i";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.J))
+                    {
+                        command_string += "j";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.K))
+                    {
+                        command_string += "k";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.L))
+                    {
+                        command_string += "l";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.M))
+                    {
+                        command_string += "m";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.N))
+                    {
+                        command_string += "n";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.O))
+                    {
+                        command_string += "o";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.P))
+                    {
+                        command_string += "p";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Q))
+                    {
+                        command_string += "q";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.R))
+                    {
+                        command_string += "r";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.S))
+                    {
+                        command_string += "s";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.T))
+                    {
+                        command_string += "t";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.U))
+                    {
+                        command_string += "u";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.V))
+                    {
+                        command_string += "v";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.W))
+                    {
+                        command_string += "w";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.X))
+                    {
+                        command_string += "x";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Y))
+                    {
+                        command_string += "y";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Z))
+                    {
+                        command_string += "z";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha0))
+                    {
+                        command_string += "0";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha1))
+                    {
+                        command_string += "1";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha2))
+                    {
+                        command_string += "2";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha3))
+                    {
+                        command_string += "3";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha4))
+                    {
+                        command_string += "4";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha5))
+                    {
+                        command_string += "5";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha6))
+                    {
+                        command_string += "6";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha7))
+                    {
+                        command_string += "7";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha8))
+                    {
+                        command_string += "8";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Alpha9))
+                    {
+                        command_string += "9";
+                    }
+                    else if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        command_string += " ";
+                    }
 
-                
+                }
             }
         }
     }
