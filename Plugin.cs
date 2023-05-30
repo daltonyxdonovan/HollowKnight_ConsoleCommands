@@ -1,7 +1,7 @@
 ﻿using BepInEx;
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 //using unity's scene management
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -35,7 +35,6 @@ namespace ConsoleCommands
         {
             if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToString() == "Menu_Title" || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToString() == "Pre_Menu_Intro")
             {
-                Log("in title screen rn, no thanks.");
                 return;
             }            
             if (canvas == null)
@@ -59,6 +58,31 @@ namespace ConsoleCommands
                 canvas.planeDistance = 1;
                 //set it to the 'uGUI' layer
                 canvas.gameObject.layer = 5;
+
+                //create an input_field and set it's parent to canvas
+                TMP_InputField input_field = new GameObject("Input Field", typeof(TMP_InputField)).GetComponent<TMP_InputField>();
+                input_field.transform.SetParent(canvas.transform);
+                //get size of screen
+                float width = Screen.width;
+                float height = Screen.height;
+                //set the input_field to be in the bottom left corner of the screen
+                input_field.GetComponent<RectTransform>().anchorMin = new Vector2(0, 0);
+                input_field.GetComponent<RectTransform>().anchorMax = new Vector2(0, 0);
+                input_field.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+                //set the size of the input_field to be 1/4 of the screen and 1/8 of the screen, respectively
+                input_field.GetComponent<RectTransform>().sizeDelta = new Vector2(width / 4, height / 8);
+                //set the text to be in the left of the input_field
+                input_field.textComponent.alignment = TextAlignmentOptions.Left;
+                //set the font size to be 1/4 of the input_field's height
+                input_field.textComponent.fontSize = input_field.GetComponent<RectTransform>().sizeDelta.y / 4;
+                //set the font color to be white
+                input_field.textComponent.color = Color.white;
+                
+
+
+
+
+
 
             }
             if (canvas != null)
@@ -98,17 +122,15 @@ namespace ConsoleCommands
                 {
                     Log("Unlocking All Achievements");
                     //find current achievement handler
-                    AchievementHandler achievementHandler = new AchievementHandler();
-                    AchievementsList achievementsList;
-                    achievementsList = Object.Instantiate<AchievementsList>(achievementHandler.achievementsListPrefab, base.transform);
-                    
-                    foreach (Achievement achievement in achievementsList.achievements)
+                    AchievementHandler achievementHandler = FindObjectOfType<AchievementHandler>();
+
+                    //I'm not sure which one actually worked, but I'm leaving both in because I don't wanna test it. It works, and that's all that matters.
+                    achievementHandler.AwardAllAchievements();
+
+                    foreach (Achievement achievement in achievementHandler.achievementsList.achievements)
                     {
                         achievementHandler.AwardAchievementToPlayer(achievement.key);
                     }
-
-
-                    
                 }
             }
         }
