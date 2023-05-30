@@ -1,6 +1,9 @@
 ﻿using BepInEx;
 using UnityEngine;
-using Unity;
+using System.Collections;
+using System.Collections.Generic;
+//using unity's scene management
+using UnityEngine.SceneManagement;
 using TMPro;
 
 namespace ConsoleCommands
@@ -30,6 +33,11 @@ namespace ConsoleCommands
 
         public void Update()
         {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToString() == "Menu_Title" || UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToString() == "Pre_Menu_Intro")
+            {
+                Log("in title screen rn, no thanks.");
+                return;
+            }            
             if (canvas == null)
             {
                 //create a new canvas
@@ -55,6 +63,7 @@ namespace ConsoleCommands
             }
             if (canvas != null)
             {
+                //if canvas isn't null, we can attempt to access values and stuff, but it's still unsafe in title
                 if (popup_timer > 0)
                 {
                     popup_timer--;
@@ -63,15 +72,44 @@ namespace ConsoleCommands
                         popup_text.text = "";
                     }
                 }
-            }
 
-            if (Input.GetKey(KeyCode.Space))
-            {
-                PlayerData.instance.maxHealthBase = 10;
-                PlayerData.instance.maxHealth = 10;
-                PlayerData.instance.AddHealth(10);
-                PlayerData.instance.AddToMaxHealth(10);
-                Log("attempting to add health");
+
+                if (Input.GetKey(KeyCode.Return))
+                {
+                    Log("Added to max MP reserve.");
+                    PlayerData.instance.MPReserveMax += 10;
+                    PlayerData.instance.MPReserveCap += 10;
+                    PlayerData.instance.MPReserve += 10;
+                    PlayerData.instance.AddToMaxMPReserve(10);
+                    Log($"MP = {PlayerData.instance.MPReserve}\nMaxMPreserve = {PlayerData.instance.MPReserveMax}");
+                }
+
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    Log("added to health");
+                    PlayerData.instance.maxHealthBase += 10;
+                    PlayerData.instance.maxHealth += 10;
+                    PlayerData.instance.AddHealth(10);
+                    PlayerData.instance.AddToMaxHealth(10);
+                    Log($"Health = {PlayerData.instance.health}\nMaxHealth = {PlayerData.instance.maxHealth}");
+                }
+
+                if (Input.GetKey(KeyCode.F1))
+                {
+                    Log("Unlocking All Achievements");
+                    //find current achievement handler
+                    AchievementHandler achievementHandler = new AchievementHandler();
+                    AchievementsList achievementsList;
+                    achievementsList = Object.Instantiate<AchievementsList>(achievementHandler.achievementsListPrefab, base.transform);
+                    
+                    foreach (Achievement achievement in achievementsList.achievements)
+                    {
+                        achievementHandler.AwardAchievementToPlayer(achievement.key);
+                    }
+
+
+                    
+                }
             }
         }
     }
