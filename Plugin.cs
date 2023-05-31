@@ -13,8 +13,6 @@ namespace ConsoleCommands
         TextMeshProUGUI command_text;
         string command_string = "";
         int popup_timer = 0;
-        Vector2 player_pos;
-        Rigidbody2D rb;
         bool selected = false;
         bool godmode = false;
         bool xdamage = false;
@@ -182,6 +180,7 @@ namespace ConsoleCommands
                     
                     GameManager.instance.playerData.infiniteAirJump = true;
                 }
+                
 
                 //if canvas isn't null, we can attempt to access values and stuff, but it's still unsafe in title
                 if (popup_timer > 0)
@@ -518,10 +517,10 @@ namespace ConsoleCommands
 
                     else if (command_string.StartsWith("/permadeath"))
                     {
-                        string[] strings = command_text.text.Split();
-                        bool choice = bool.Parse(strings[1]);
-                        permadeath = choice;
-                        Log($"Permadeath set to {choice}!");
+                        //string[] strings = command_text.text.Split();
+                        //bool choice = bool.Parse(strings[1]);
+                        //permadeath = choice;
+                        //Log($"Permadeath set to {choice}!");
                         
                     }
 
@@ -555,8 +554,8 @@ namespace ConsoleCommands
                             "<color=yellow>/allkeys</color> - unlocks all keys\n" +
                             //nailrange is a bitch because the 'L' key is bound to something /eyeroll, so it's disabled until I feel like writing a harmony patch
                             //"<color=yellow>/nailrange</color> <color=#4d92cf><int></color> - sets nail range to the amount entered\n" +
-                            //permadeath
-                            "<color=yellow>/permadeath</color> <color=#4d92cf><bool></color> - sets permadeath to the bool entered\n" +
+                            //permadeath i haven't figured out yet
+                            //"<color=yellow>/permadeath</color> <color=#4d92cf><bool></color> - sets permadeath to the bool entered\n" +
                             //jump
                             "<color=yellow>/jump</color> <color=#4d92cf><bool></color> - enables infinite jump\n" +
                             "<color=yellow>/achget</color> - unlocks all 63 steam awards (REQUIRES STEAM GAME)\n" +
