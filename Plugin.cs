@@ -495,15 +495,16 @@ namespace ConsoleCommands
 
                     else if (command_string.StartsWith("/allkeys"))
                     {
-                        GameManager.instance.playerData.hasCityKey = false;
-                        GameManager.instance.playerData.hasSlykey = false;
-                        GameManager.instance.playerData.gaveSlykey = false;
-                        GameManager.instance.playerData.hasWhiteKey = false;
-                        GameManager.instance.playerData.usedWhiteKey = false;
-                        GameManager.instance.playerData.hasMenderKey = false;
-                        GameManager.instance.playerData.hasWaterwaysKey = false;
-                        GameManager.instance.playerData.hasSpaKey = false;
-                        GameManager.instance.playerData.hasLoveKey = false;
+                        GameManager.instance.playerData.hasCityKey = true;
+                        GameManager.instance.playerData.hasSlykey = true;
+                        GameManager.instance.playerData.gaveSlykey = true;
+                        GameManager.instance.playerData.hasWhiteKey = true;
+                        GameManager.instance.playerData.usedWhiteKey = true;
+                        GameManager.instance.playerData.hasMenderKey = true;
+                        GameManager.instance.playerData.hasWaterwaysKey = true;
+                        GameManager.instance.playerData.hasSpaKey = true;
+                        GameManager.instance.playerData.hasLoveKey = true;
+                        Log("Gave all keys!");
                     }
 
                     else if (command_string.StartsWith("/addzote"))
@@ -552,8 +553,8 @@ namespace ConsoleCommands
                             "<color=yellow>/allcharms</color> - unlocks all charms\n" +
                             //allkeys
                             "<color=yellow>/allkeys</color> - unlocks all keys\n" +
-                            //nailrange
-                            "<color=yellow>/nailrange</color> <color=#4d92cf><int></color> - sets nail range to the amount entered\n" +
+                            //nailrange is a bitch because the 'L' key is bound to something /eyeroll, so it's disabled until I feel like writing a harmony patch
+                            //"<color=yellow>/nailrange</color> <color=#4d92cf><int></color> - sets nail range to the amount entered\n" +
                             //permadeath
                             "<color=yellow>/permadeath</color> <color=#4d92cf><bool></color> - sets permadeath to the bool entered\n" +
                             //jump
