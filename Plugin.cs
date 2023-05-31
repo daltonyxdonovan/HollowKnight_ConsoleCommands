@@ -47,7 +47,7 @@ namespace ConsoleCommands
 
         public void AddCharm(int charmNum)
         {
-            if (charmNum < 0 || charmNum > 44)
+            if (charmNum < 0 || charmNum > 39)
             {
                 Log("That number doesn't exist.");
                 return;
@@ -81,6 +81,10 @@ namespace ConsoleCommands
             GameManager.instance.playerData.maxHealth += amount;
             GameManager.instance.playerData.AddHealth(amount);
             GameManager.instance.playerData.AddToMaxHealth(amount);
+            GameManager.instance.playerData.prevHealth += amount;
+            GameManager.instance.playerData.health += amount;
+            //GameManager.instance.playerData.blockerHits = 999;
+            GameManager.instance.playerData.UpdateBlueHealth();
             Log($"Added {amount} to Health Reserve\nHealth = {GameManager.instance.playerData.health}\nMaxHealth = {GameManager.instance.playerData.maxHealth}");
         }
 
@@ -160,6 +164,10 @@ namespace ConsoleCommands
                     GameManager.instance.playerData.health = 999;
                     GameManager.instance.playerData.maxHealth = 999;
                     GameManager.instance.playerData.MPCharge = 999;
+                    GameManager.instance.playerData.prevHealth = 999;
+                    GameManager.instance.playerData.health = 999;
+                    GameManager.instance.playerData.blockerHits = 999;
+                    GameManager.instance.playerData.UpdateBlueHealth();
                 }
                 if (xdamage)
                 {
@@ -172,7 +180,9 @@ namespace ConsoleCommands
                     if (instance != null)
                     {
                         //rb = instance.
+                        
                     }
+                    Log("Flight is currently disabled, sorry!");
                     //player_pos = HeroController.instance.
                 }
 
@@ -223,11 +233,12 @@ namespace ConsoleCommands
                         command_text.text = "Press / for commands";
                         command_string = "";
                     }
+                    popup_timer = 0;
                 }
 
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
-
+                    popup_timer = 0;
                     if (command_string.StartsWith("/addhealth"))
                     {
                         string[] strings = command_text.text.Split();
@@ -344,6 +355,125 @@ namespace ConsoleCommands
 
                     }
 
+                    else if (command_string.StartsWith("/addegg"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        GameManager.instance.playerData.rancidEggs += choice;
+                        Log($"Added {choice} to Rancid Eggs\nRancid Eggs: {GameManager.instance.playerData.rancidEggs}");
+                    }
+
+                    else if (command_string.StartsWith("/addkey"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        GameManager.instance.playerData.simpleKeys += choice;
+                        Log($"Added {choice} to Simple Keys\nSimple Keys: {GameManager.instance.playerData.simpleKeys}");
+                    }
+
+                    else if (command_string.StartsWith("/addore"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        GameManager.instance.playerData.ore += choice;
+                        Log($"Added {choice} to Ore\nOre: {GameManager.instance.playerData.ore}");
+                    }
+
+                    else if (command_string.StartsWith("/addorb"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        GameManager.instance.playerData.dreamOrbs += choice;
+                        Log($"Added {choice} to Dream Orbs\nDream Orbs: {GameManager.instance.playerData.dreamOrbs}");
+                    }
+
+                    else if (command_string.StartsWith("/slots"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        GameManager.instance.playerData.charmSlots = choice;
+                        Log($"Set {choice} as Slots amount!\n Total Slots: {GameManager.instance.playerData.charmSlots}");
+                    }
+
+                    else if (command_string.StartsWith("/allpowerups"))
+                    {
+                        Log("Unlocking all powerups!");
+                        GameManager.instance.playerData.canDash = true;
+                        GameManager.instance.playerData.hasDash = true;
+                        GameManager.instance.playerData.hasWalljump = true;
+                        GameManager.instance.playerData.canWallJump = true;
+                        GameManager.instance.playerData.hasSuperDash = true;
+                        GameManager.instance.playerData.hasDreamNail = true;
+                        GameManager.instance.playerData.hasShadowDash = true;
+                        GameManager.instance.playerData.canShadowDash = true;
+                        GameManager.instance.playerData.dreamNailUpgraded = true;
+                        GameManager.instance.playerData.hasDoubleJump = true;
+                        GameManager.instance.playerData.hasLantern = true;
+                        GameManager.instance.playerData.hasAcidArmour = true;
+                        GameManager.instance.playerData.hasTramPass = true;
+                        GameManager.instance.playerData.hasSpell = true;
+                        if (GameManager.instance.playerData.fireballLevel == 0)
+                        {
+                            GameManager.instance.playerData.fireballLevel = 1;
+                        }
+                        if (GameManager.instance.playerData.quakeLevel == 0)
+                        {
+                            GameManager.instance.playerData.quakeLevel = 1;
+                        }
+                        if (GameManager.instance.playerData.screamLevel == 0)
+                        {
+                            GameManager.instance.playerData.screamLevel = 1;
+                        }
+                        GameManager.instance.playerData.hasLoveKey = true;
+                        GameManager.instance.playerData.hasWhiteKey = true;
+                        GameManager.instance.playerData.hasKingsBrand = true;
+                        GameManager.instance.playerData.hasNailArt = true;
+                        GameManager.instance.playerData.hasDashSlash = true;
+                        GameManager.instance.playerData.hasCyclone = true;
+                        GameManager.instance.playerData.hasUpwardSlash = true;
+                        GameManager.instance.playerData.hasCharm = true;
+                        GameManager.instance.playerData.gotCharm_1 = true;
+                        GameManager.instance.playerData.gotCharm_2 = true;
+                        GameManager.instance.playerData.gotCharm_3 = true;
+                        GameManager.instance.playerData.gotCharm_4 = true;
+                        GameManager.instance.playerData.gotCharm_5 = true;
+                        GameManager.instance.playerData.gotCharm_6 = true;
+                        GameManager.instance.playerData.gotCharm_7 = true;
+                        GameManager.instance.playerData.gotCharm_8 = true;
+                        GameManager.instance.playerData.gotCharm_9 = true;
+                        GameManager.instance.playerData.gotCharm_10 = true;
+                        GameManager.instance.playerData.gotCharm_11 = true;
+                        GameManager.instance.playerData.gotCharm_12 = true;
+                        GameManager.instance.playerData.gotCharm_13 = true;
+                        GameManager.instance.playerData.gotCharm_14 = true;
+                        GameManager.instance.playerData.gotCharm_15 = true;
+                        GameManager.instance.playerData.gotCharm_16 = true;
+                        GameManager.instance.playerData.gotCharm_17 = true;
+                        GameManager.instance.playerData.gotCharm_18 = true;
+                        GameManager.instance.playerData.gotCharm_19 = true;
+                        GameManager.instance.playerData.gotCharm_20 = true;
+                        GameManager.instance.playerData.gotCharm_21 = true;
+                        GameManager.instance.playerData.gotCharm_22 = true;
+                        GameManager.instance.playerData.gotCharm_23 = true;
+                        GameManager.instance.playerData.gotCharm_24 = true;
+                        GameManager.instance.playerData.gotCharm_25 = true;
+                        GameManager.instance.playerData.gotCharm_26 = true;
+                        GameManager.instance.playerData.gotCharm_27 = true;
+                        GameManager.instance.playerData.gotCharm_28 = true;
+                        GameManager.instance.playerData.gotCharm_29 = true;
+                        GameManager.instance.playerData.gotCharm_30 = true;
+                        GameManager.instance.playerData.gotCharm_31 = true;
+                        GameManager.instance.playerData.gotCharm_32 = true;
+                        GameManager.instance.playerData.gotCharm_33 = true;
+                        GameManager.instance.playerData.gotCharm_34 = true;
+                        GameManager.instance.playerData.gotCharm_35 = true;
+                        GameManager.instance.playerData.gotCharm_37 = true;
+                        GameManager.instance.playerData.gotCharm_38 = true;
+                        GameManager.instance.playerData.gotCharm_39 = true;
+                        GameManager.instance.playerData.charmSlots = 11;
+                    }
+
+                    
                     else if (command_string.StartsWith("/addcharm"))
                     {
                         string[] strings = command_text.text.Split();
@@ -351,8 +481,39 @@ namespace ConsoleCommands
                         AddCharm(choice);
                     }
 
+                    else if (command_string.StartsWith("/vessels"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        GameManager.instance.playerData.vesselFragments += choice;
+                        GameManager.instance.playerData.vesselFragmentCollected = true;
+                        Log($"Added {choice} vessels!\nVessel Fragments: {GameManager.instance.playerData.vesselFragments}");
+                    }
+
+                    else if (command_string.StartsWith("/nailrange"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+                        GameManager.instance.playerData.nailRange = choice;
+                        Log($"Set Nail Range to {choice}!");
+                    }
 
 
+                    
+                    else if (command_string.StartsWith("/help"))
+                    {
+                        Log("<color=yellow>/addhealth</color> <color=#4d92cf><int></color> - adds the amount entered to health and maxHealth\n" +
+                            "<color=yellow>/addmp</color> <color=#4d92cf><int></color> - adds the amount entered to MP (soul)\n" +
+                            "<color=yellow>/addmpreserve</color> <color=#4d92cf><int></color> - adds the amount entered to MP Reserve (MP cap)\n" +
+                            "<color=yellow>/addmoney</color> <color=#4d92cf><int></color> - adds the amount entered to Banker\n" +
+                            "<color=yellow>/addgeo</color> <color=#4d92cf><int></color> - adds the amount entered to Geo count\n" +
+                            "<color=yellow>/achget</color> - unlocks all 63 steam awards (REQUIRES STEAM GAME)\n" +
+                            "<color=yellow>/godmode</color> - as the name suggests\n" +
+                            "<color=yellow>/xdamage</color> - sets nail and beam dmg to 999\n" +
+                            "<color=yellow>/stags</color> - unlocks all stag stations\n" +
+                            "<color=red>press return (enter) to close this window</color>");
+                        popup_timer = 99999;
+                    }
 
                     selected = false;
                     command_text.text = "Press / for commands";
