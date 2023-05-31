@@ -4,7 +4,10 @@ Adds several console commands to Hollow Knight. Why? Because we can, of course! 
 Infinite health! Infinite money! Godmode! Instakill! all ya could want, unless it isn't, in which case:
 I am open to suggestions for commands, and have plenty of free time. Just drop a suggestion at Daltonyx#4105 on discord and I'll get working on it!
 
-## Installation
+
+#############################################################################
+############################# Installation ##################################
+#############################################################################
 
 To install this project, follow these steps:
 
@@ -20,25 +23,22 @@ To install this project, follow these steps:
 
 3. Put this ConsoleCommands.DLL into "steamapps/common/Hollow Knight/BepInEx/Plugins" and start game!
 
-## To Compile Yourself
-
-###WINDOWS
-To compile this yourself (i get it man, who knows what other folks are doing), follow these steps:
-
-1. clone the repository wherever you feel like
-2. cd into the directory where you cloned it (powershell, quake window, cmd, etc)
-3. run dotnet build (in the terminal from step 2)
-NOTE: I think it's .net6 it uses
-
-## Usage
+##############################################################################
+################################ Usage #######################################
+##############################################################################
 
 To use this project, follow these steps:
 
 1. When actually in game (not at the title screen!) press / to open the console
+
 2. Type your command
+
 4. Press return (enter) to send the command.
 
-## Current Commands
+##############################################################################
+############################ Current Commands ################################
+##############################################################################
+
 /addhealth (int) - adds the amount entered to health and maxHealth both
 	
 /addmp (int) - adds the amount entered to MP (referred to as soul in-game, MP in code)
@@ -46,6 +46,28 @@ To use this project, follow these steps:
 /addmpreserve (int) - adds the amount entered to MPReserve and MP Cap
 	
 /addmoney (int) - adds the amount entered to the Banker
+
+/addore (int) - adds the amount entered to Ore
+
+/addvessels (int) - adds the amount entered to Vessel Fragments
+
+/addgeo (int) - adds the amount entered to Geo count
+
+/addegg (int) - adds the amount entered to rancid Eggs
+
+/addkey (int) - adds the amount entered to Simple Keys
+
+/addorb (int) - adds the amount entered to Dream Orbs
+
+/addzote (int) - adds the amount entered to Zote count
+
+/addcharm (int) - equips the selected charm (0-39)
+
+/allcharms - unlocks all powerups
+
+/allkeys - gives all keys
+
+/jump (bool) - enables/disables infinite jump
 	
 /achget - unlocks _ALL_ 63 achievements (requires the game on steam i think /shrug)
 	
@@ -54,5 +76,3 @@ To use this project, follow these steps:
 /xdamage - enables instakill (damage of nail and beam set to 999)
 
 /stags - enables all stag stations
-
-/addgeo (int) - adds the amount entered to geo count
