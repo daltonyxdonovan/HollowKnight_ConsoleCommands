@@ -46,6 +46,28 @@ To use this project, follow these steps:
 /addmpreserve (int) - adds the amount entered to MPReserve and MP Cap
 	
 /addmoney (int) - adds the amount entered to the Banker
+
+/addore (int) - adds the amount entered to Ore
+
+/addvessels (int) - adds the amount entered to Vessel Fragments
+
+/addgeo (int) - adds the amount entered to Geo count
+
+/addegg (int) - adds the amount entered to rancid Eggs
+
+/addkey (int) - adds the amount entered to Simple Keys
+
+/addorb (int) - adds the amount entered to Dream Orbs
+
+/addzote (int) - adds the amount entered to Zote count
+
+/addcharm (int) - equips the selected charm (0-39)
+
+/allcharms - unlocks all powerups
+
+/allkeys - gives all keys
+
+/jump (bool) - enables/disables infinite jump
 	
 /achget - unlocks _ALL_ 63 achievements (requires the game on steam i think /shrug)
 	
@@ -54,5 +76,3 @@ To use this project, follow these steps:
 /xdamage - enables instakill (damage of nail and beam set to 999)
 
 /stags - enables all stag stations
-
-/addgeo (int) - adds the amount entered to geo count
