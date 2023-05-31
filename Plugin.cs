@@ -1,6 +1,7 @@
 ﻿using BepInEx;
 using UnityEngine;
 using TMPro;
+using System.Xml.Serialization;
 
 namespace ConsoleCommands
 {
@@ -18,6 +19,7 @@ namespace ConsoleCommands
         bool godmode = false;
         bool xdamage = false;
         bool flight = false;
+        bool permadeath = false;
 
         private void Awake()
         {
@@ -168,6 +170,7 @@ namespace ConsoleCommands
                     GameManager.instance.playerData.health = 999;
                     GameManager.instance.playerData.blockerHits = 999;
                     GameManager.instance.playerData.UpdateBlueHealth();
+                    GameManager.instance.playerData.isInvincible = true;
                 }
                 if (xdamage)
                 {
@@ -176,16 +179,9 @@ namespace ConsoleCommands
                 }
                 if (flight)
                 {
-                    HeroController instance = HeroController.instance;
-                    if (instance != null)
-                    {
-                        //rb = instance.
-                        
-                    }
-                    Log("Flight is currently disabled, sorry!");
-                    //player_pos = HeroController.instance.
+                    
+                    GameManager.instance.playerData.infiniteAirJump = true;
                 }
-
 
                 //if canvas isn't null, we can attempt to access values and stuff, but it's still unsafe in title
                 if (popup_timer > 0)
@@ -301,12 +297,12 @@ namespace ConsoleCommands
                         Log("Extra Damage (instakill) enabled!");
                     }
 
-                    else if (command_string.StartsWith("/flight"))
+                    else if (command_string.StartsWith("/jump"))
                     {
                         string[] strings = command_text.text.Split();
                         bool choice = bool.Parse(strings[1]);
                         flight = choice;
-                        Log($"Flight set to {choice} NOTE: THIS COMMAND IS INACTIVE RN");
+                        Log($"Infinite Jump set to {choice}!");
                     }
 
                     else if (command_string.StartsWith("/stags"))
@@ -395,7 +391,7 @@ namespace ConsoleCommands
                         Log($"Set {choice} as Slots amount!\n Total Slots: {GameManager.instance.playerData.charmSlots}");
                     }
 
-                    else if (command_string.StartsWith("/allpowerups"))
+                    else if (command_string.StartsWith("/allcharms"))
                     {
                         Log("Unlocking all powerups!");
                         GameManager.instance.playerData.canDash = true;
@@ -473,7 +469,6 @@ namespace ConsoleCommands
                         GameManager.instance.playerData.charmSlots = 11;
                     }
 
-                    
                     else if (command_string.StartsWith("/addcharm"))
                     {
                         string[] strings = command_text.text.Split();
@@ -481,7 +476,7 @@ namespace ConsoleCommands
                         AddCharm(choice);
                     }
 
-                    else if (command_string.StartsWith("/vessels"))
+                    else if (command_string.StartsWith("/addvessels"))
                     {
                         string[] strings = command_text.text.Split();
                         int choice = int.Parse(strings[1]);
@@ -498,19 +493,76 @@ namespace ConsoleCommands
                         Log($"Set Nail Range to {choice}!");
                     }
 
+                    else if (command_string.StartsWith("/allkeys"))
+                    {
+                        GameManager.instance.playerData.hasCityKey = false;
+                        GameManager.instance.playerData.hasSlykey = false;
+                        GameManager.instance.playerData.gaveSlykey = false;
+                        GameManager.instance.playerData.hasWhiteKey = false;
+                        GameManager.instance.playerData.usedWhiteKey = false;
+                        GameManager.instance.playerData.hasMenderKey = false;
+                        GameManager.instance.playerData.hasWaterwaysKey = false;
+                        GameManager.instance.playerData.hasSpaKey = false;
+                        GameManager.instance.playerData.hasLoveKey = false;
+                    }
+
+                    else if (command_string.StartsWith("/addzote"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        int choice = int.Parse(strings[1]);
+
+                        GameManager.instance.playerData.zote += choice;
+                        Log($"Added {choice} Zote kills!\nZote Kills: {GameManager.instance.playerData.zote}");
+                    }
+
+                    else if (command_string.StartsWith("/permadeath"))
+                    {
+                        string[] strings = command_text.text.Split();
+                        bool choice = bool.Parse(strings[1]);
+                        permadeath = choice;
+                        Log($"Permadeath set to {choice}!");
+                        
+                    }
+
 
                     
                     else if (command_string.StartsWith("/help"))
                     {
+                        //holy shit i hate writing help commands like this
                         Log("<color=yellow>/addhealth</color> <color=#4d92cf><int></color> - adds the amount entered to health and maxHealth\n" +
                             "<color=yellow>/addmp</color> <color=#4d92cf><int></color> - adds the amount entered to MP (soul)\n" +
                             "<color=yellow>/addmpreserve</color> <color=#4d92cf><int></color> - adds the amount entered to MP Reserve (MP cap)\n" +
                             "<color=yellow>/addmoney</color> <color=#4d92cf><int></color> - adds the amount entered to Banker\n" +
                             "<color=yellow>/addgeo</color> <color=#4d92cf><int></color> - adds the amount entered to Geo count\n" +
+                            //addegg
+                            "<color=yellow>/addegg</color> <color=#4d92cf><int></color> - adds the amount entered to rancid Eggs\n" +
+                            //addkey
+                            "<color=yellow>/addkey</color> <color=#4d92cf><int></color> - adds the amount entered to Simple Keys\n" +
+                            //addore
+                            "<color=yellow>/addore</color> <color=#4d92cf><int></color> - adds the amount entered to Ore\n" +
+                            //addorb
+                            "<color=yellow>/addorb</color> <color=#4d92cf><int></color> - adds the amount entered to Dream Orbs\n" +
+                            //addzote
+                            "<color=yellow>/addzote</color> <color=#4d92cf><int></color> - adds the amount entered to Zote count\n" +
+                            //addvessels
+                            "<color=yellow>/addvessels</color> <color=#4d92cf><int></color> - adds the amount entered to Vessel Fragments\n" +
+                            //addcharm
+                            "<color=yellow>/addcharm</color> <color=#4d92cf><int></color> - adds the charm entered to inventory\n" +
+                            //allcharm
+                            "<color=yellow>/allcharms</color> - unlocks all charms\n" +
+                            //allkeys
+                            "<color=yellow>/allkeys</color> - unlocks all keys\n" +
+                            //nailrange
+                            "<color=yellow>/nailrange</color> <color=#4d92cf><int></color> - sets nail range to the amount entered\n" +
+                            //permadeath
+                            "<color=yellow>/permadeath</color> <color=#4d92cf><bool></color> - sets permadeath to the bool entered\n" +
+                            //jump
+                            "<color=yellow>/jump</color> <color=#4d92cf><bool></color> - enables infinite jump\n" +
                             "<color=yellow>/achget</color> - unlocks all 63 steam awards (REQUIRES STEAM GAME)\n" +
                             "<color=yellow>/godmode</color> - as the name suggests\n" +
                             "<color=yellow>/xdamage</color> - sets nail and beam dmg to 999\n" +
                             "<color=yellow>/stags</color> - unlocks all stag stations\n" +
+
                             "<color=red>press return (enter) to close this window</color>");
                         popup_timer = 99999;
                     }
