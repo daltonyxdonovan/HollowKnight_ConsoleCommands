@@ -39,7 +39,9 @@ To use this project, follow these steps:
 ## Current Commands
 /addhealth (int) - adds the amount entered to health and maxHealth both
 	
-/addmp (int) - adds the amount entered to MP and maxMP both
+/addmp (int) - adds the amount entered to MP (referred to as soul in-game, MP in code)
+
+/addmpreserve (int) - adds the amount entered to MPReserve and MP Cap
 	
 /addmoney (int) - adds the amount entered to the Banker
 	
@@ -48,3 +50,9 @@ To use this project, follow these steps:
 /godmode - enables godmode (as far as I can tell)
 	
 /xdamage - enables instakill (damage of nail and beam set to 999)
+
+/stags - enables all stag stations
+
+/addgeo (int) - adds the amount entered to geo count
+
+
