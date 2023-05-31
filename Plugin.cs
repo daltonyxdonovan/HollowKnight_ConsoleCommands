@@ -300,25 +300,24 @@ namespace ConsoleCommands
 
                     else if (command_string.StartsWith("/stags"))
                     {
-                        GameManager unsafeInstance = GameManager.UnsafeInstance;
-                        if (unsafeInstance != null)
-                        {
-                            PlayerData playerData = unsafeInstance.playerData;
-                            playerData.openedTown = true;
-                            playerData.openedTownBuilding = true;
-                            playerData.openedCrossroads = true;
-                            playerData.openedGreenpath = true;
-                            playerData.openedRuins1 = true;
-                            playerData.openedRuins2 = true;
-                            playerData.openedFungalWastes = true;
-                            playerData.openedRoyalGardens = true;
-                            playerData.openedRestingGrounds = true;
-                            playerData.openedDeepnest = true;
-                            playerData.openedStagNest = true;
-                            playerData.openedHiddenStation = true;
-                            playerData.gladeDoorOpened = true;
-                            playerData.troupeInTown = true;
-                        }
+
+
+                        Log("Unlocking all stag stations!");
+                        GameManager.instance.playerData.openedTown = true;
+                        GameManager.instance.playerData.openedTownBuilding = true;
+                        GameManager.instance.playerData.openedCrossroads = true;
+                        GameManager.instance.playerData.openedGreenpath = true;
+                        GameManager.instance.playerData.openedRuins1 = true;
+                        GameManager.instance.playerData.openedRuins2 = true;
+                        GameManager.instance.playerData.openedFungalWastes = true;
+                        GameManager.instance.playerData.openedRoyalGardens = true;
+                        GameManager.instance.playerData.openedRestingGrounds = true;
+                        GameManager.instance.playerData.openedDeepnest = true;
+                        GameManager.instance.playerData.openedStagNest = true;
+                        GameManager.instance.playerData.openedHiddenStation = true;
+                        GameManager.instance.playerData.gladeDoorOpened = true;
+                        GameManager.instance.playerData.troupeInTown = true;
+                        
                     }
 
                     else if (command_string.StartsWith("/addmoney"))
