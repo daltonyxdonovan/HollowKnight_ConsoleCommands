@@ -298,6 +298,29 @@ namespace ConsoleCommands
                         Log($"Flight set to {choice} NOTE: THIS COMMAND IS INACTIVE RN");
                     }
 
+                    else if (command_string.StartsWith("/stags"))
+                    {
+                        GameManager unsafeInstance = GameManager.UnsafeInstance;
+                        if (unsafeInstance != null)
+                        {
+                            PlayerData playerData = unsafeInstance.playerData;
+                            playerData.openedTown = true;
+                            playerData.openedTownBuilding = true;
+                            playerData.openedCrossroads = true;
+                            playerData.openedGreenpath = true;
+                            playerData.openedRuins1 = true;
+                            playerData.openedRuins2 = true;
+                            playerData.openedFungalWastes = true;
+                            playerData.openedRoyalGardens = true;
+                            playerData.openedRestingGrounds = true;
+                            playerData.openedDeepnest = true;
+                            playerData.openedStagNest = true;
+                            playerData.openedHiddenStation = true;
+                            playerData.gladeDoorOpened = true;
+                            playerData.troupeInTown = true;
+                        }
+                    }
+
                     else if (command_string.StartsWith("/addmoney"))
                     {
                         string[] strings = command_text.text.Split();
