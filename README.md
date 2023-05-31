@@ -4,15 +4,17 @@ Adds several console commands to Hollow Knight. Why? Because we can, of course! 
 Infinite health! Infinite money! Godmode! Instakill! all ya could want, unless it isn't, in which case:
 I am open to suggestions for commands, and have plenty of free time. Just drop a suggestion at Daltonyx#4105 on discord and I'll get working on it!
 
-this will be on nexusmods soon with an easy installer for windows, but I will update the .dll here in releases as I think about it for any early birds
-
 ## Installation
 
 To install this project, follow these steps:
 
-1. Download bepinex 6.0.0pre-1 (I use bepinex 6 from the github here: https://github.com/BepInEx/BepInEx/releases) DOES NOT WORK WITH BEPINEX 5.4
+1. Download bepinex 6.0.0pre-1. DOES NOT WORK WITH BEPINEX 5.4
 	
-	1.a. Extract all files from the downloaded zip to your Hollow Knight installation. (Normally 'Program Files x86/steam/steamapps/common/Hollow Knight')
+	1.a. I made a windows easy installer you can get here: https://www.nexusmods.com/hollowknight/mods/44
+
+	1.b. if not windows, or just want to do it yourself, download the zip for bepinex 6.0.0pre-1 from here: https://github.com/BepInEx/BepInEx/releases
+
+	1.c. ONLY if using step 1.b, Extract all files from the downloaded zip to your Hollow Knight installation. (Normally 'Program Files x86/steam/steamapps/common/Hollow Knight')
 
 2. Start the game at least once, to populate bepinex folders
 
@@ -23,7 +25,7 @@ To install this project, follow these steps:
 ###WINDOWS
 To compile this yourself (i get it man, who knows what other folks are doing), follow these steps:
 
-1. clone this repository wherever you feel like
+1. clone the repository wherever you feel like
 2. cd into the directory where you cloned it (powershell, quake window, cmd, etc)
 3. run dotnet build (in the terminal from step 2)
 NOTE: I think it's .net6 it uses
@@ -54,5 +56,3 @@ To use this project, follow these steps:
 /stags - enables all stag stations
 
 /addgeo (int) - adds the amount entered to geo count
-
-
