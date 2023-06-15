@@ -594,6 +594,8 @@ namespace ConsoleCommands
                             "<color=yellow>/godmode</color> - as the name suggests\n" +
                             "<color=yellow>/xdamage</color> - sets nail and beam dmg to 999\n" +
                             "<color=yellow>/stags</color> - unlocks all stag stations\n" +
+                            "<color=yellow>/heal</color> - heals you to max health\n" +
+                            "<color=yellow>/sethealth</color> <color=#4d92cf><int></color> - sets health and maxHealth\n" +
 
                             "<color=red>press return (enter) to close this window</color>");
                         popup_timer = 99999;
