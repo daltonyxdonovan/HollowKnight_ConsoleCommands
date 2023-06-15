@@ -75,6 +75,12 @@ namespace ConsoleCommands
             Log($"Added {amount} to MP!");
         }
 
+        public void Heal()
+        {
+            GameManager.instance.playerData.health = GameManager.instance.playerData.maxHealth;
+            GameManager.instance.playerData.prevHealth = GameManager.instance.playerData.maxHealth;
+        }
+
         public void AddToHealthReserve(int amount)
         {
             GameManager.instance.playerData.maxHealthBase += amount;
@@ -86,6 +92,15 @@ namespace ConsoleCommands
             //GameManager.instance.playerData.blockerHits = 999;
             GameManager.instance.playerData.UpdateBlueHealth();
             Log($"Added {amount} to Health Reserve\nHealth = {GameManager.instance.playerData.health}\nMaxHealth = {GameManager.instance.playerData.maxHealth}");
+        }
+
+        public void SetHealth(int amount)
+        {
+            if (amount < 1) return;
+            GameManager.instance.playerData.health = amount;
+            GameManager.instance.playerData.prevHealth = amount;
+            GameManager.instance.playerData.UpdateBlueHealth();
+            Log($"Set Health to {amount}");
         }
 
         public void UnlockAllAchievements()
@@ -262,6 +277,11 @@ namespace ConsoleCommands
                         {
                             AddMP(choice);
                         }
+                    }
+
+                    else if (command_string.StartsWith("/heal"))
+                    {
+                        Heal();
                     }
 
                     else if (command_string.StartsWith("/addmpreserve"))
@@ -473,6 +493,18 @@ namespace ConsoleCommands
                         string[] strings = command_text.text.Split();
                         int choice = int.Parse(strings[1]);
                         AddCharm(choice);
+                    }
+
+                    else if (command_string.StartsWith("/sethealth"))
+                    {
+                        int amount;
+                        string[] strings = command_text.text.Split();
+                        amount = int.Parse(strings[1]);
+                        GameManager.instance.playerData.health = amount;
+                        //set max health and prevhealth too
+                        GameManager.instance.playerData.maxHealth = amount;
+                        GameManager.instance.playerData.prevHealth = amount;
+                        Log("set health!");
                     }
 
                     else if (command_string.StartsWith("/addvessels"))
