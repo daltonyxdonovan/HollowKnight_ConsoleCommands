@@ -1846,7 +1846,7 @@ namespace ConsoleCommands
                 debugText.rectTransform.anchorMin = new Vector2(0, 0);
                 debugText.rectTransform.anchorMax = new Vector2(0, 0);
                 debugText.rectTransform.anchoredPosition = new Vector2(0, 0);
-                debugText.alignment = TextAlignmentOptions.Left;
+                debugText.alignment = TextAlignmentOptions.Center;
                 debugText.fontSize = .5f;
                 debugText.color = Color.white;
                 debugText.text = GetDebugText();
