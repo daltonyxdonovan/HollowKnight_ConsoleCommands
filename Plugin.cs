@@ -21,7 +21,7 @@ namespace ConsoleCommands
         bool xdamage = false;
         bool flight = false;
         //bool permadeath = false;
-        bool showDebug = false;
+        bool showDebug = true;
 
         private void Awake()
         {
@@ -38,7 +38,8 @@ namespace ConsoleCommands
                    $"maxHealth: {GameManager.instance.playerData.maxHealth}\n" +
                    $"infJump: {flight}\n" +
                    $"xDamage: {xdamage}\n" +
-                   $"godMode: {godmode}";
+                   $"godMode: {godmode}" +
+                   "F1 - toggle info";
         }
 
         public void AddGeo(int amount)
@@ -1902,10 +1903,11 @@ namespace ConsoleCommands
                 if (popup_timer > 0)
                 {
                     popup_timer--;
-                    if (popup_timer == 0)
-                    {
-                        popup_text.text = "";
-                    }
+                    
+                }
+                if (popup_timer == 0)
+                {
+                    popup_text.text = "";
                 }
 
                 if (Input.GetKeyDown(KeyCode.Slash) || Input.GetKeyDown(KeyCode.Period))
@@ -2378,7 +2380,7 @@ namespace ConsoleCommands
                             "<color=yellow>F1</color> - enables or disables debug info\n" +
 
                             "<color=red>press return (enter) to close this window early</color>");
-                        popup_timer = 2500;
+                        popup_timer = 5000;
                     }
 
                     selected = false;
