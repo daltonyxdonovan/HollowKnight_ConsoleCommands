@@ -10,6 +10,9 @@ I am open to suggestions for commands, and have plenty of free time. Just drop a
 4. Press return (enter) to send the command.
 
 ## Current Commands
+
+/help - shows the help screen. very useful! (kinda blocked by the damn ui, oh well. sethealth is the top one /shrug)
+
 /addhealth (int) - adds the amount entered to health and maxHealth both
 
 /sethealth (int) - sets health to whatever choice is
