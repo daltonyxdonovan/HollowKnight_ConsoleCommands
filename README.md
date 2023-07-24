@@ -11,7 +11,13 @@ I am open to suggestions for commands, and have plenty of free time. Just drop a
 
 ## Current Commands
 /addhealth (int) - adds the amount entered to health and maxHealth both
-	
+
+/sethealth (int) - sets health to whatever choice is
+
+/setbdamage (int 1-5) - sets beam damage to corresponding upgrade value (goes above actual game values past 3, be careful!)
+
+/setndamage (int 1-5) - sets nail damage to corresponding upgrade value (goes above actual game values, be careful!)
+ 
 /addmp (int) - adds the amount entered to MP (referred to as soul in-game, MP in code)
 
 /addmpreserve (int) - adds the amount entered to MPReserve and MP Cap
@@ -42,9 +48,11 @@ I am open to suggestions for commands, and have plenty of free time. Just drop a
 	
 /achget - unlocks _ALL_ 63 achievements (requires the game on steam i think /shrug)
 	
-/godmode - enables godmode (as far as I can tell)
+/godmode (bool) - enables godmode (as far as I can tell)
 	
-/xdamage - enables instakill (damage of nail and beam set to 999)
+/xdamage (bool) - enables instakill (damage of nail and beam set to 999)
+
+/reset -resets character to base stats, and fixes any borked character (if you ever got the old damage bug from xdamage or godmode. it's patched now)
 
 /stags - enables all stag stations
 
