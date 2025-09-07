@@ -1,4 +1,5 @@
-# HOLLOW KNIGHT CONSOLE COMMANDS <3
+# DO NOT USE THIS. IT'S HELLA OLD
+# USE THE VERSION ON NEXUSMODS, SAVE US BOTH THE HEARTACHE AND TIME.
 
 Adds several console commands to Hollow Knight. Why? Because we can, of course! Ever wanted to just play around in a really hard game?
 Infinite health! Infinite money! Godmode! Instakill! all ya could want, unless it isn't, in which case:
